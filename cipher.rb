@@ -1,12 +1,10 @@
 def caesar_cipher(string, shift)
-  alphabet = ("a".."z").to_a
-  string = string.split("")
-
-string.map do |character| 
-    if alphabet.include?(character)
-      alphabet[(character.downcase.ord - 97 + shift)%26]
-    elsif alphabet.include?(character.downcase)
-      alphabet[(character.downcase.ord - 97 + shift)%26].upcase
+  shift = shift%26
+  string.split("").map do |character| 
+    if character.match(/[a-z]/)
+      ((character.ord - "a".ord + shift)%26  + "a".ord).chr
+    elsif character.match(/[A-Z]/)
+      ((character.ord - "A".ord + shift)%26 + "A".ord).chr
     else
       character
     end
